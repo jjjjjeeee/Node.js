@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-sale=1"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+</head>
+<script>
+
+$(function(){
+   if (navigator.geolocation) { // GPS를 지원하면
+      navigator.geolocation.getCurrentPosition(function(position) {
+         var lat = position.coords.latitude;
+         var lon = position.coords.longitude;
+         openwheather(lat, lon);
+      }, function(error) {
+         console.error(error);
+      }, {
+         enableHighAccuracy : false,
+         maximumAge : 0,
+         timeout : Infinity
+      });
+   } else {
+      alert('GPS를 지원하지 않습니다');
+   }
+});
+   
+function openwheather(lat, lon){
+      var url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&lang=kr&APPID=9aabde1074e2b8eeb1266ea28effadb2&units=metric";
+      $.ajax({
+         url : url,
+         dataType : "json",
+         type : "GET",
+         success : function(result) {
+            var tag = "도시 : " + result.name + "<br/>";
+            tag += "날씨 : " + result.weather[0].description + "<br/>";
+            tag += "현재온도 : " + result.main.temp + "<br/>";
+            tag += "최저온도 : " + result.main.temp_min + "<br/>";
+            tag += "최고온도 : " + result.main.temp_max + "<br/>";
+            $("#d1").html(tag);
+         }
+      });
+   }
+   
+</script>
+<body>
+<div id="d1">
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=chrome">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글내용</title>
+<script>
+    function del(no){
+        if(confirm('삭제할까요?')){
+            location.href='/del?no='+no;
+        }
+    }
+</script>
+</head>
+<body>
+    <h1>글내용보기</h1>
+    <ul>
+        <li>번호 : <%=result[0].no%></li>
+        <li>글쓴이 : <%=result[0].userid%></li>
+        <li>등록일 : <%=result[0].writedate%>, 조회수 : <%=result[0].hit%></li>
+        <li>제목 : <%=result[0].subject%></li>
+        <li>글내용<br/>
+            <%=result[0].content%>
+        </li>
+    </ul>
+    <a href="/edit?no=<%=result[0].no%>">수정</a>
+    <a href="javascript:del(<%=result[0].no%>)">삭제</a>
+</body>
+</html>

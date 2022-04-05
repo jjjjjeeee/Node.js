@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=chrome">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+</head>
+<body>
+   
+    <% if(logStatus != 'Y') {%>
+        <a href="/login">로그인</a> 
+    <%} else if(logStatus == 'Y') {%>
+        <%=user.username%><a href="/logout">로그아웃</a>
+    <%}%> 
+        <a href="/list">게시판</a> 
+</body>
+</html>
